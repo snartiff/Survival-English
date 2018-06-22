@@ -1,0 +1,23 @@
+Goal: The purpose of this app is to showcase my UI/UX development skills with React. 
+All data consists of Javascript objects and for now there is no back-end.
+
+Description: This is an educational app for English Language Learners who want to
+learn business English. The goal is for each "level" to be modeled after WIDA ELL standards. 
+
+Process:
+Start building level-by-level. Complete Levels 1 and Level 2 first. Add lesson objectives 
+and 'cheat' sheet so users can easily show/hide tips. Complete levels 3-5 next. 
+Once my first lesson is complete, I will add additional lessons.
+
+Structure
+
+Lesson:
+Each Lesson component will consist of 5 different Prompt components. Each lesson will have 
+a different language objective.
+
+Prompt:
+Each Prompt component will have its own UI, designed specifically for that level (1-5).
+
+Data:
+Data.js is the source of all Data used in this application. Each Prompt will have a separate
+function that populates its data.

@@ -1,0 +1,62 @@
+.align-center {
+  text-align: center !important;
+}
+
+.bold {
+ font-weight: bolder !important;
+}
+
+.button {
+  margin-top: 20px;
+  margin-right: 20px;
+}
+
+.directions {
+  text-align: center;
+}
+
+.field {
+  margin: 20px;
+}
+
+.inner-tabs {
+  display: flex;
+  justify-content: center;
+}
+
+.inner-tabs a {
+  padding-right: 20px;
+  font-size: 20px;
+}
+
+.is-green {
+  color: green !important;
+}
+
+.is-highlighted {
+  background-color: yellow;  
+}
+
+.is-red {
+  color: red !important;
+}
+
+.is-selected {
+  text-decoration: underline;
+}
+
+.label {
+  padding-right: 10px;
+}
+.PositiveFeedback {
+  color: green;
+}
+
+.Preselectedverb {
+  background-color: yellow;
+}
+
+.PromptImage {
+  height: 200px;
+  width: 200px;
+}
