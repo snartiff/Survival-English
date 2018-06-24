@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import HungryBusinesswoman from './images/HungryBusinesswoman.jpg';
 import { getLevelOneLessonData, getLevelTwoLessonData } from './Data.js';
 import LevelOnePrompt from './LevelOnePrompt.js';
+import LevelTwoPrompt from './LevelTwoPrompt.js';
+import LevelThreePrompt from './LevelThreePrompt.js';
+import LevelFourPrompt from './LevelFourPrompt.js';
+import LevelFivePrompt from './LevelFivePrompt.js';
 import _ from 'lodash';
 
 class WritingPrompt extends Component {
@@ -94,17 +98,9 @@ isCorrectSentence( targetWord, indexOfCorrectWord, correctWordsArray, promptWord
 
 //Needs documentation
 handleLevelChange( e ) {
-  let selectedLevel = e.target.value;
-  if ( document.querySelector(".userInput") ) {
-    document.querySelector(".userInput").value = "";
-  }
-
   this.setState({
-    level: selectedLevel,
-    userFeedback: ""
+    level: e.target.value
   })
-
-  this.componentDidMount( selectedLevel, undefined, undefined );
 }
 
 //Needs documentation
@@ -233,7 +229,7 @@ componentDidMount( level, newLevelTwoPrompt, sentencesCopy ) {
 }
 
 createLevelDropdown() {
-let dropdown =         
+let dropdown =
 <div className="field is-horizontal">
     <label className="label is-large">Level:</label>
     <div className="control">
@@ -250,11 +246,32 @@ let dropdown =
 </div>
 return dropdown
 }
-
+// if ( this.state.level !== "1" ) {
+//   return (
+//     <div>
+//       {dropdown}
+//       <div className="title is-4">{ this.state.lesson.directions }</div>
+//       <div className="align-center"><img className="PromptImage" alt="Businesswoman Eating" src={ this.state.lesson.image }></img></div>
+//       <div className="WritingPrompt title is-2 align-center">{ this.state.lesson.sentence }</div>
+//       <div>{ userInput }</div>
+//       <div className="align-center">
+//         <h1 className={ this.state.userFeedback === "Try Again!" ? "title is-1 is-red" : "title is-1 is-green" }>{ this.state.userFeedback }</h1>
+//         <h1 className={ this.state.numberOfCorrectAnswers !== 0 ? "title is-1 is-green" : "title is-1" }>Correct: { this.state.numberOfCorrectAnswers + "/" + this.state.numberOfTotalPrompts }</h1>
+//       </div>
+//     </div>
+//   );
+// } else {
+//   return(
+//     <div>
+//       {dropdown}
+//       <LevelOnePrompt/>
+//     </div>
+//   )
+// }
   render() {
     let userInput;
     let dropdown = this.createLevelDropdown()
-    if ( this.state.level !== "1" ) {
+    if ( this.state.level === "2" ) {
       userInput =
       <div className="field">
         <div className="control" >
@@ -263,36 +280,57 @@ return dropdown
           <div className="title is-1 is-green align-center">{ this.state.lesson.feedback }</div>
         </div>
       </div>
-    } else {
-
-      if ( document.querySelector(".is-highlighted") ) {
-        let $highlightedWord = document.querySelector(".is-highlighted");
-        $highlightedWord.innerText = this.state.correctWord;
-      }
-
     }
-if ( this.state.level !== "1" ) {
-  return (
-    <div>
-      {dropdown}
-      <div className="title is-4">{ this.state.lesson.directions }</div>
-      <div className="align-center"><img className="PromptImage" alt="Businesswoman Eating" src={ this.state.lesson.image }></img></div>
-      <div className="WritingPrompt title is-2 align-center">{ this.state.lesson.sentence }</div>
-      <div>{ userInput }</div>
-      <div className="align-center">
-        <h1 className={ this.state.userFeedback === "Try Again!" ? "title is-1 is-red" : "title is-1 is-green" }>{ this.state.userFeedback }</h1>
-        <h1 className={ this.state.numberOfCorrectAnswers !== 0 ? "title is-1 is-green" : "title is-1" }>Correct: { this.state.numberOfCorrectAnswers + "/" + this.state.numberOfTotalPrompts }</h1>
-      </div>
-    </div>
-  );  
-} else {
-  return(
-    <div>
-      {dropdown}
-      <LevelOnePrompt/>    
-    </div>
-  )
-}
+
+    switch( this.state.level ) {
+      case "1":
+        return (
+          <div>
+            {dropdown}
+            <LevelOnePrompt/>
+          </div>
+        )
+          break;
+      case "2":
+        return (
+          <div>
+            {dropdown}
+            <LevelTwoPrompt/>
+          </div>
+        )
+        break;
+      case "3":
+        return (
+          <div>
+            {dropdown}
+            <LevelThreePrompt/>
+          </div>
+        )
+        break;
+      case "4":
+        return (
+          <div>
+            {dropdown}
+            <LevelFourPrompt/>
+          </div>
+        )
+      case "5":
+        return (
+          <div>
+            {dropdown}
+            <LevelFourPrompt/>
+          </div>
+        )
+        break;
+      default:
+      return (
+        <div>
+          {dropdown}
+          <LevelOnePrompt/>
+        </div>
+      )
+          break;
+    }
   }
 }
 

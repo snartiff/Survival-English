@@ -37,7 +37,7 @@ export function getLevelOneLessonData() {
   let p8 = {};
   let p9 = {};
   let p10 = {};
-  
+
   let possibleAnswers = ["was", "were", "is", "are"];
   let levelOnePrompts = [];
 
@@ -91,8 +91,8 @@ export function getLevelOneLessonData() {
   p10.pastTenseAnswer = "was";
   p10.presentTenseAnswer = "is"
   p10.possibleAnswers = possibleAnswers;
-  
-  
+
+
   levelOnePrompts.push( p1, p2, p3, p4, p5, p6, p7, p8, p9, p10 )
 
   return levelOnePrompts

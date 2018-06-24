@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { getLevelTwoLessonData } from './Data.js';
+// import { getLevelTwoLessonData } from './Data.js';
 import _ from 'lodash';
 
 class LevelOnePrompt extends Component {
@@ -12,10 +12,10 @@ class LevelOnePrompt extends Component {
 // this.showHighlightedWord = this.showHighlightedWord.bind(this)
 }
 componentDidMount( ) {
- let levelOnePrompts = getLevelOneLessonData();
- this.setState({
-   prompts: levelOnePrompts
- })
+ // let levelOnePrompts = getLevelOneLessonData();
+ // this.setState({
+ //   prompts: levelOnePrompts
+ // })
 }
 
   render() {
