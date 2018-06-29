@@ -4,24 +4,24 @@ import WomanWriting from './images/womanwritingatdesk.jpeg';
 import HungryBusinesswoman from './images/HungryBusinesswoman.jpg';
 
 export function getLevelTwoLessonData() {
-  let s1 = {};
-  let s2 = {};
-  let s3 = {};
+  let p1 = {};
+  let p2 = {};
+  let p3 = {};
   let levelTwoPrompts = [];
 
-  s1.image = WomanWriting;
-  s1.sentence = "Elizabeth is at her desk writing.";
-  s1.word = "is";
-  s1.answer = "was";
-  s2.image = LateMan;
-  s2.sentence = "Gary is late to the meeting.";
-  s2.word = "is";
-  s2.answer = "was";
-  s3.image = ManDrinkingCoffee;
-  s3.sentence = "Jeremy is drinking a cup of coffee.";
-  s3.word = "is";
-  s3.answer = "was";
-  levelTwoPrompts.push( s1,s2,s3 );
+  p1.image = WomanWriting;
+  p1.sentence = "Elizabeth __ at her desk writing.";
+  p1.presentTenseAnswer = "is";
+  p1.pastTenseAnswer = "was";
+  p2.image = LateMan;
+  p2.sentence = "Gary __ late to the meeting.";
+  p2.presentTenseAnswer= "is";
+  p2.pastTenseAnswer = "Gary was late to the meeting.";
+  p3.image = ManDrinkingCoffee;
+  p3.sentence = "Jeremy __ drinking a cup of coffee.";
+  p3.presentTenseAnswer = "is";
+  p3.pastTenseAnswer = "was";
+  levelTwoPrompts.push( p1, p2, p3 );
 
   return levelTwoPrompts
 }
