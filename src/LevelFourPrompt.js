@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 // import { getLevelFourLessonData } from './Data.js';
-import _ from 'lodash';
+// import _ from 'lodash';
 
 class LevelFourPrompt extends Component {
   constructor(props) {

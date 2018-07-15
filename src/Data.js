@@ -2,6 +2,15 @@ import ManDrinkingCoffee from './images/businessmandrinkingcoffee.jpeg';
 import LateMan from './images/lateman.jpg';
 import WomanWriting from './images/womanwritingatdesk.jpeg';
 import HungryBusinesswoman from './images/HungryBusinesswoman.jpg';
+import PeopleTalking from './images/PeopleTalking.jpg';
+import SendingEmail from './images/SendingEmail.png';
+import WomanDrinkingCoffee from './images/WomanDrinkingCoffee.jpg';
+import MenEatingBreakfast from './images/MenEatingBreakfast.jpg';
+import PeopleWalking from './images/PeopleWalking.jpg';
+import WomanLeaving from './images/WomanLeaving.png';
+import WomanTalking from './images/WomanTalking.png';
+import ManSleeping from './images/ManSleeping.jpg';
+import BrokenComputer from './images/BrokenComputer.png';
 
 export function getLevelTwoLessonData() {
   let p1 = {};
@@ -38,62 +47,70 @@ export function getLevelOneLessonData() {
   let p9 = {};
   let p10 = {};
 
-  let possibleAnswers = ["was", "were", "is", "are"];
+  let pastTenseAnswers = ["was", "were"];
+  let presentTenseAnswers = ["is", "are", "am"];
   let levelOnePrompts = [];
 
   p1.image = HungryBusinesswoman;
-  p1.sentence = "Anne __ eating her lunch.";
+  p1.sentence = "Anne __ eating lunch.";
   p1.pastTenseAnswer = "was";
   p1.presentTenseAnswer = "is"
-  p1.possibleAnswers = possibleAnswers;
-  p2.image = HungryBusinesswoman;
-  p2.sentence = "The people ___ taking the train.";
+  p1.presentTenseAnswers = presentTenseAnswers
+  p1.pastTenseAnswers = pastTenseAnswers;
+
+  p2.image = PeopleTalking;
+  p2.sentence = "The people ___ talking.";
   p2.pastTenseAnswer= "were";
   p2.presentTenseAnswer = "are"
-  p2.possibleAnswers = possibleAnswers;
-  p3.image = HungryBusinesswoman;
-  p3.sentence = "Jose __ going to send an email.";
+  p2.presentTenseAnswers = presentTenseAnswers
+  p2.pastTenseAnswers = pastTenseAnswers
+
+  p3.image = SendingEmail;
+  p3.sentence = "Jose __ sending an email.";
   p3.pastTenseAnswer = "was";
   p3.presentTenseAnswer = "is"
-  p3.possibleAnswers = possibleAnswers;
-  p4.image = HungryBusinesswoman;
+
+  p4.image = WomanDrinkingCoffee;
   p4.sentence = "The woman __ drinking coffee.";
   p4.pastTenseAnswer = "was";
   p4.presentTenseAnswer = "is"
-  p4.possibleAnswers = possibleAnswers;
-  p5.image = HungryBusinesswoman;
+
+  p5.image = MenEatingBreakfast;
   p5.sentence = "The men __ eating breakfast.";
   p5.pastTenseAnswer = "were";
   p5.presentTenseAnswer = "are"
-  p5.possibleAnswers = possibleAnswers;
-  p6.image = HungryBusinesswoman;
+
+  p6.image = PeopleWalking;
   p6.sentence = "They __ walking.";
   p6.pastTenseAnswer = "were";
   p6.presentTenseAnswer = "are"
-  p6.possibleAnswers = possibleAnswers;
-  p7.image = HungryBusinesswoman;
+
+  p7.image = WomanLeaving;
   p7.sentence = "The women __ leaving.";
   p7.pastTenseAnswer = "were";
   p7.presentTenseAnswer = "are"
-  p7.possibleAnswers = possibleAnswers;
-  p8.image = HungryBusinesswoman;
+
+  p8.image = WomanTalking;
   p8.sentence = "She __ talking.";
   p8.pastTenseAnswer = "was";
   p8.presentTenseAnswer = "is"
-  p8.possibleAnswers = possibleAnswers;
-  p9.image = HungryBusinesswoman;
+
+  p9.image = ManSleeping;
   p9.sentence = "He __ sleeping.";
   p9.pastTenseAnswer = "was";
   p9.presentTenseAnswer = "is"
-  p9.possibleAnswers = possibleAnswers;
-  p10.image = HungryBusinesswoman;
+
+  p10.image = BrokenComputer;
   p10.sentence = "It __ broken.";
   p10.pastTenseAnswer = "was";
   p10.presentTenseAnswer = "is"
-  p10.possibleAnswers = possibleAnswers;
-
 
   levelOnePrompts.push( p1, p2, p3, p4, p5, p6, p7, p8, p9, p10 )
+
+  for (let i = 0; i < levelOnePrompts.length; i++) {
+    levelOnePrompts[i].presentTenseAnswers = presentTenseAnswers;
+    levelOnePrompts[i].pastTenseAnswers = pastTenseAnswers;
+  }
 
   return levelOnePrompts
 }

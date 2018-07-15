@@ -13,10 +13,27 @@
 
 .directions {
   text-align: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.fa.fa-heart {
+  padding-right: 5px;
 }
 
 .field {
   margin: 20px;
+}
+
+.help {
+  font-size: 20px !important;
+}
+
+.icnDiv {
+  background-color: WhiteSmoke !important;
+  margin: 0 auto;
+  width: 275px;
+  border-radius: 25px;
 }
 
 .inner-tabs {
@@ -33,8 +50,16 @@
   color: green !important;
 }
 
+.is-grey {
+  color: grey !important;
+}
+
+.is-hidden {
+  display: none;
+}
+
 .is-highlighted {
-  background-color: yellow;  
+  background-color: yellow;
 }
 
 .is-red {
@@ -43,6 +68,10 @@
 
 .is-selected {
   text-decoration: underline;
+}
+
+.is-white {
+  color: white !important;
 }
 
 .label {
@@ -59,4 +88,14 @@
 .PromptImage {
   height: 200px;
   width: 200px;
+}
+
+.tblDiv {
+text-align: left;
+margin-left: 50px;
+}
+
+.WritingPrompt {
+  margin-top: 20px;
+  margin-bottom: 20px;
 }

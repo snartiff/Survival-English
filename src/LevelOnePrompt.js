@@ -1,29 +1,38 @@
 import React, { Component } from 'react';
 import { getLevelOneLessonData } from './Data.js';
-import { getRandomPrompt, getNewPrompt, isPresent } from './CommonFunctions.js'
+import { getRandomPrompt, getNewPrompt } from './CommonFunctions.js'
 import _ from 'lodash';
 
 class LevelOnePrompt extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      $btnWords: [],
+      $icnHearts: [],
+      isHidden: true,
       isPresent: true,
       numberOfCorrectAnswers: 0,
+      numberOfTotalPrompts: 0,
       prompt: null,
-      prompts: [],
-      $wordButtons: []
+      prompts: []
     };
+
     this.animateButtons = this.animateButtons.bind(this);
+    this.animateHeartIcons = this.animateHeartIcons.bind(this);
+    this.createHeartIcons = this.createHeartIcons.bind(this);
     this.createWordButtons = this.createWordButtons.bind(this);
+    this.getHelpTable = this.getHelpTable.bind(this);
     this.getNewPrompt = getNewPrompt.bind(this);
     this.isCorrectWord = this.isCorrectWord.bind(this);
-    this.isPresent = isPresent.bind(this);
+    this.isPresent = this.isPresent.bind(this);
+    this.resetHearts= this.resetHearts.bind(this);
+    this.toggleHelp = this.toggleHelp.bind(this);
   }
 
   animateButtons( isCorrect ) {
     if ( isCorrect ) {
       this.setState({
-        $wordButtons: _.shuffle( this.createWordButtons( this.state.prompt ) )
+        $btnWords: _.shuffle( this.createWordButtons( this.state.prompt, this.state.isPresent ) )
       })
     }
 
@@ -33,37 +42,121 @@ class LevelOnePrompt extends Component {
     }
   }
 
+  animateHeartIcons( numberOfCorrectAnswers ) {
+    let $greyHeartIcons = document.querySelectorAll(".fa-heart");
+    if ( numberOfCorrectAnswers < this.state.numberOfTotalPrompts ) {
+      for ( let i = 0; i <= numberOfCorrectAnswers; i++ ) {
+        $greyHeartIcons[i].className = "fa fa-heart fa-lg is-red ";
+      }
+    }
+  }
+
   componentDidMount() {
       let levelOnePrompts = getLevelOneLessonData();
       let newPrompt = getRandomPrompt( levelOnePrompts );
 
       this.setState({
-        prompts: levelOnePrompts,
         prompt: newPrompt,
-        $wordButtons: _.shuffle( this.createWordButtons( newPrompt ) )
+        prompts: levelOnePrompts,
+        numberOfTotalPrompts: levelOnePrompts.length,
+        $btnWords: _.shuffle( this.createWordButtons( newPrompt, this.state.isPresent ) ),
+        $icnHearts: this.createHeartIcons(levelOnePrompts.length)
       })
   }
 
-  createWordButtons( newPrompt ) {
-    let that = this;
-    let aryWordButtons = [];
-    let aryPromptAnswers = newPrompt.possibleAnswers;
+  createHeartIcons( numberOfTotalPrompts ) {
+    let $icnHearts = [];
+    for ( let i = 0; i < numberOfTotalPrompts; i++ ) {
+      let $icnHeart = <i className="fa fa-heart fa-lg is-white" key={ i }></i>;
+      $icnHearts.push( $icnHeart );
+    }
+    return $icnHearts
+  }
 
-    for ( let i = 0; i < aryPromptAnswers.length; i++) {
-      let wordButton = <button key={ i } onClick={ that.isCorrectWord } className="button is-medium is-warning">{ aryPromptAnswers[i] }</button>;
-      aryWordButtons.push(wordButton);
+  createWordButtons( newPrompt, pastOrPresent ) {
+    let that = this;
+    let $btnWords = [];
+    let presentTenseAnswers = newPrompt.presentTenseAnswers;
+    let pastTenseAnswers = newPrompt.pastTenseAnswers;
+
+    if ( pastOrPresent ) {
+      for ( let i = 0; i < presentTenseAnswers.length; i++) {
+        let $btnWord = <button key={ i } onClick={ that.isCorrectWord } className="button is-medium is-warning">{ presentTenseAnswers[i] }</button>;
+        $btnWords.push( $btnWord );
+      }
+    } else {
+      for ( let i = 0; i < pastTenseAnswers.length; i++) {
+        let $btnWord = <button key={ i } onClick={ that.isCorrectWord } className="button is-medium is-warning">{ pastTenseAnswers[i] }</button>;
+        $btnWords.push( $btnWord );
+      }
     }
 
-    return aryWordButtons;
+    return $btnWords;
+  }
+
+  getHelpTable() {
+    let $tblHelp = null;
+    if ( this.state.isPresent ) {
+      $tblHelp =
+      <table className="table is-striped">
+        <tbody>
+          <tr>
+            <td>I</td>
+            <td>Am</td>
+          </tr>
+          <tr>
+            <td>You</td>
+            <td>Are</td>
+          </tr>
+          <tr>
+            <td>He/She/It</td>
+            <td>Is</td>
+          </tr>
+          <tr>
+            <td>We/They</td>
+            <td>Are</td>
+          </tr>
+        </tbody>
+      </table>
+    } else {
+      $tblHelp =
+      <table id="tblHelp" className="table is-striped">
+        <tbody>
+          <tr>
+            <td>I</td>
+            <td>Was</td>
+          </tr>
+          <tr>
+            <td>You</td>
+            <td>Were</td>
+          </tr>
+          <tr>
+            <td>He/She/It</td>
+            <td>Was</td>
+          </tr>
+          <tr>
+            <td>We/They</td>
+            <td>Were</td>
+          </tr>
+        </tbody>
+      </table>
+    }
+
+    return $tblHelp
   }
 
   isCorrectWord( e ) {
     let usersAnswer = e.target.innerText.trim();
-
+    let that = this;
     if ( usersAnswer === this.state.prompt.pastTenseAnswer && this.state.prompts.length > 0 && !this.state.isPresent || usersAnswer === this.state.prompt.presentTenseAnswer && this.state.prompts.length > 0 && this.state.isPresent ) {
+      let correctAnswerCount = this.state.numberOfCorrectAnswers;
+      this.setState({
+        numberOfCorrectAnswers: correctAnswerCount +=1
+      })
+      this.animateHeartIcons( this.state.numberOfCorrectAnswers );
       this.getNewPrompt( this.state.prompts.slice(), this.state.prompt );
     }
-    
+
     if ( usersAnswer === this.state.prompt.pastTenseAnswer && !this.state.isPresent || usersAnswer === this.state.prompt.presentTenseAnswer && this.state.isPresent ) {
       e.target.className = "";
       e.target.className = "button is-medium is-success";
@@ -76,26 +169,65 @@ class LevelOnePrompt extends Component {
     }
   }
 
+  isPresent() {
+    let level = document.querySelector('.select option:checked').innerText;
+    let pastOrPresent = document.querySelector('.is-selected').innerText;
+    let prompts = getLevelOneLessonData();
+    pastOrPresent = ( pastOrPresent === "Present" ) ? false : true;
+    let newPrompt = getRandomPrompt( prompts );
+    this.resetHearts();
+    this.setState({
+      isPresent: pastOrPresent,
+      prompts: prompts,
+      prompt: newPrompt,
+      numberOfCorrectAnswers: 0,
+      $btnWords: this.createWordButtons( newPrompt, pastOrPresent )
+    })
+  }
+
+  resetHearts() {
+    let $icnHearts = document.querySelectorAll('.fa.fa-heart');
+    for ( let i = 0; i < $icnHearts.length; i++ ) {
+      $icnHearts[i].className = "fa fa-heart fa-lg is-white"
+    }
+  }
+
+  toggleHelp() {
+    this.setState({
+      isHidden: !this.state.isHidden
+    })
+  }
+
   render() {
     if ( !_.isUndefined( this.state.prompt ) && !_.isNil( this.state.prompt ) ) {
+      let $tblHelp = this.getHelpTable();
       return (
         <div>
-        <div className="inner-tabs align-center">
-            <a onClick={ this.isPresent } className={ this.state.isPresent ? "is-selected" : "" }>Present</a>
-            <a onClick={ this.isPresent } className={ this.state.isPresent ? "" : "is-selected" }>Past</a>
-        </div>
+          <div className="inner-tabs align-center">
+              <a onClick={ this.isPresent } className={ this.state.isPresent ? "is-selected" : "" }>Present</a>
+              <a onClick={ this.isPresent } className={ this.state.isPresent ? "" : "is-selected" }>Past</a>
+          </div>
           <div className="title is-4">
             <h4 className="directions"><span className="bold">Directions: </span>{ this.state.isPresent ? "Click on the correct word in the present tense." : "Click on the correct word in the past tense."  }</h4>
           </div>
           <div className="align-center">
             <img className="PromptImage" src={ this.state.prompt.image }></img>
           </div>
-          <div className="align-center">{ this.state.$wordButtons }</div>
+          <div className="align-center">{ this.state.$btnWords }</div>
           <div className="WritingPrompt title is-2 align-center">
             <h1>{ this.state.prompt.sentence }</h1>
           </div>
+          <div className="icnDiv align-center">
+            { this.state.$icnHearts }
+          </div>
+          <div className="tblDiv">
+            <a onClick={this.toggleHelp} className="help">Need Help?</a>
+            <div className={ this.state.isHidden === false ? "tblHelp" : "is-hidden" }>
+              { $tblHelp }
+            </div>
+          </div>
         </div>
-      );
+      )
     } else {
       return (
         <div>

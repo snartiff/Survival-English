@@ -17,7 +17,7 @@ class WritingPrompt extends Component {
   }
 
 createLevelDropdown() {
-  let dropdown =
+  let ddlLevel =
   <div className="field is-horizontal">
       <label className="label is-large">Level:</label>
       <div className="control">
@@ -32,7 +32,7 @@ createLevelDropdown() {
         </div>
       </div>
   </div>
-  return dropdown
+  return ddlLevel
 }
 
 handleLevelChange( e ) {
@@ -42,12 +42,12 @@ handleLevelChange( e ) {
 }
 
   render() {
-    let dropdown = this.createLevelDropdown()
+    let ddlLevel = this.createLevelDropdown()
     switch( this.state.level ) {
       case "1":
         return (
           <div>
-            {dropdown}
+            {ddlLevel}
             <LevelOnePrompt/>
           </div>
         )
@@ -55,7 +55,7 @@ handleLevelChange( e ) {
       case "2":
         return (
           <div>
-            {dropdown}
+            {ddlLevel}
             <LevelTwoPrompt/>
           </div>
         )
@@ -63,7 +63,7 @@ handleLevelChange( e ) {
       case "3":
         return (
           <div>
-            {dropdown}
+            {ddlLevel}
             <LevelThreePrompt/>
           </div>
         )
@@ -71,22 +71,22 @@ handleLevelChange( e ) {
       case "4":
         return (
           <div>
-            {dropdown}
+            {ddlLevel}
             <LevelFourPrompt/>
           </div>
         )
       case "5":
         return (
           <div>
-            {dropdown}
-            <LevelFourPrompt/>
+            {ddlLevel}
+            <LevelFivePrompt/>
           </div>
         )
         break;
       default:
       return (
         <div>
-          {dropdown}
+          {ddlLevel}
           <LevelOnePrompt/>
         </div>
       )
