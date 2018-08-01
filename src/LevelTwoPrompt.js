@@ -20,7 +20,7 @@ class LevelTwoPrompt extends Component {
     this.isCorrectSentence = this.isCorrectSentence.bind(this);
     this.isPresent = isPresent.bind(this);
   }
-  
+
   componentDidMount( ) {
     let levelTwoPrompts = getLevelTwoLessonData();
     let newPrompt = getRandomPrompt( levelTwoPrompts );
@@ -86,12 +86,15 @@ class LevelTwoPrompt extends Component {
             <a onClick={ this.isPresent } className={ this.state.isPresent ? "is-selected" : "" }>Present</a>
             <a onClick={ this.isPresent } className={ this.state.isPresent ? "" : "is-selected" }>Past</a>
         </div>
-          <div className="align-center"><img className="PromptImage" alt="Businesswoman Eating" src={ this.state.prompt.image }></img></div>
+        <div className="title is-4">
+          <h4 className="directions"><span className="bold">Directions: </span>{ this.state.isPresent ? "Write the present tense word." : "Write the past tense word."  }</h4>
+        </div>
+          <div className="align-center"><img className="PromptImage" src={ this.state.prompt.image }></img></div>
           <div className="WritingPrompt title is-2 align-center">{ this.state.prompt.sentence }</div>
         <div className="field">
           <div className="control" >
-            <input className="userInput input is-large is-info" placeholder="Fix the sentence using past tense"></input>
-            <button className="button is-large is-info" onClick={ this.handleSubmit }>Submit</button>
+            <input className="userInput input is-medium is-info"></input>
+            <button className="button is-medium is-warning" onClick={ this.handleSubmit }>Submit</button>
             <div className="title is-1 is-green align-center">{ this.state.prompt.feedback }</div>
           </div>
         </div>

@@ -208,7 +208,7 @@ class LevelOnePrompt extends Component {
               <a onClick={ this.isPresent } className={ this.state.isPresent ? "" : "is-selected" }>Past</a>
           </div>
           <div className="title is-4">
-            <h4 className="directions"><span className="bold">Directions: </span>{ this.state.isPresent ? "Click on the correct word in the present tense." : "Click on the correct word in the past tense."  }</h4>
+            <h4 className="directions"><span className="bold">Directions: </span>{ this.state.isPresent ? "Click the present tense button." : "Click the past tense button."  }</h4>
           </div>
           <div className="align-center">
             <img className="PromptImage" src={ this.state.prompt.image }></img>
