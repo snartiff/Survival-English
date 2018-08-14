@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { getLevelTwoLessonData } from './Data.js';
-import { getRandomPrompt, getNewPrompt, isPresent } from './CommonFunctions.js'
+import { getRandomPrompt, getNewPrompt, isPresent, animateHeartIcons, createHeartIcons, resetHearts } from './CommonFunctions.js'
 import _ from 'lodash';
 
 class LevelTwoPrompt extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      $icnHearts: [],
       isPresent: true,
       numberOfCorrectAnswers: 0,
       numberOfTotalPrompts: 0,
@@ -14,11 +15,14 @@ class LevelTwoPrompt extends Component {
       prompts: [],
       userFeedback: ""
     };
+    this.animateHeartIcons = animateHeartIcons.bind(this);
+    this.createHeartIcons = createHeartIcons.bind(this);
     this.getNewPrompt = getNewPrompt.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.increaseCorrectAnswerCount = this.increaseCorrectAnswerCount.bind(this);
     this.isCorrectSentence = this.isCorrectSentence.bind(this);
     this.isPresent = isPresent.bind(this);
+    this.resetHearts = resetHearts.bind(this);
   }
 
   componentDidMount( ) {
@@ -28,8 +32,18 @@ class LevelTwoPrompt extends Component {
     this.setState({
       prompts: levelTwoPrompts,
       prompt: newPrompt,
-      numberOfTotalPrompts: levelTwoPrompts.length
+      numberOfTotalPrompts: levelTwoPrompts.length,
+      $icnHearts: this.createHeartIcons(levelTwoPrompts.length)
     })
+  }
+
+  createHeartIcons( numberOfTotalPrompts ) {
+    let $icnHearts = [];
+    for ( let i = 0; i < numberOfTotalPrompts; i++ ) {
+      let $icnHeart = <i className="fa fa-heart fa-lg is-white" key={ i }></i>;
+      $icnHearts.push( $icnHeart );
+    }
+    return $icnHearts
   }
 
   handleSubmit() {
@@ -38,9 +52,9 @@ class LevelTwoPrompt extends Component {
 
     if ( this.isCorrectSentence( usersSentence ) && this.state.prompts.length === 1 ) {
       this.setState({
-        userFeedback: "Lesson Complete!",
-        numberOfCorrectAnswers: ( numOfCorrectAnswers < this.state.numberOfTotalPrompts ) ? numOfCorrectAnswers += 1 : this.state.numberOfCorrectAnswers
+        userFeedback: "Lesson Complete!"
       })
+      this.increaseCorrectAnswerCount();
     } else if ( this.isCorrectSentence( usersSentence ) ) {
       document.querySelector(".userInput").value = "";
       this.increaseCorrectAnswerCount();
@@ -58,11 +72,11 @@ class LevelTwoPrompt extends Component {
   //Usage: When a user submits a correct answer, increaseCorrectAnswerCount increases the numberOfCorrectAnswers
   //setState: numberOfCorrectAnswers increased by 1
   increaseCorrectAnswerCount() {
-    let numOfCorrectAnswers = this.state.numberOfCorrectAnswers;
-    let correctAnswerCount = numOfCorrectAnswers += 1;
+    let correctAnswerCount = this.state.numberOfCorrectAnswers;
     this.setState({
-      numberOfCorrectAnswers: correctAnswerCount
+      numberOfCorrectAnswers: correctAnswerCount += 1
     })
+    this.animateHeartIcons( this.state.numberOfCorrectAnswers );
   }
 
   //Needs documentation
@@ -98,9 +112,8 @@ class LevelTwoPrompt extends Component {
             <div className="title is-1 is-green align-center">{ this.state.prompt.feedback }</div>
           </div>
         </div>
-        <div className="align-center">
-          <h1 className={ this.state.userFeedback === "Try Again!" ? "title is-1 is-red" : "title is-1 is-green" }>{ this.state.userFeedback }</h1>
-          <h1 className={ this.state.numberOfCorrectAnswers !== 0 ? "title is-1 is-green" : "title is-1" }>Correct: { this.state.numberOfCorrectAnswers + "/" + this.state.numberOfTotalPrompts }</h1>
+        <div className="icnDiv align-center">
+          { this.state.$icnHearts }
         </div>
         </div>
       );

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { getLevelOneLessonData } from './Data.js';
-import { getRandomPrompt, getNewPrompt } from './CommonFunctions.js'
+import { getRandomPrompt, getNewPrompt, animateHeartIcons, createHeartIcons, resetHearts } from './CommonFunctions.js'
 import _ from 'lodash';
 
 class LevelOnePrompt extends Component {
@@ -18,14 +18,14 @@ class LevelOnePrompt extends Component {
     };
 
     this.animateButtons = this.animateButtons.bind(this);
-    this.animateHeartIcons = this.animateHeartIcons.bind(this);
-    this.createHeartIcons = this.createHeartIcons.bind(this);
+    this.animateHeartIcons = animateHeartIcons.bind(this);
+    this.createHeartIcons = createHeartIcons.bind(this);
     this.createWordButtons = this.createWordButtons.bind(this);
     this.getHelpTable = this.getHelpTable.bind(this);
     this.getNewPrompt = getNewPrompt.bind(this);
     this.isCorrectWord = this.isCorrectWord.bind(this);
     this.isPresent = this.isPresent.bind(this);
-    this.resetHearts= this.resetHearts.bind(this);
+    this.resetHearts= resetHearts.bind(this);
     this.toggleHelp = this.toggleHelp.bind(this);
   }
 
@@ -42,15 +42,6 @@ class LevelOnePrompt extends Component {
     }
   }
 
-  animateHeartIcons( numberOfCorrectAnswers ) {
-    let $greyHeartIcons = document.querySelectorAll(".fa-heart");
-    if ( numberOfCorrectAnswers < this.state.numberOfTotalPrompts ) {
-      for ( let i = 0; i <= numberOfCorrectAnswers; i++ ) {
-        $greyHeartIcons[i].className = "fa fa-heart fa-lg is-red ";
-      }
-    }
-  }
-
   componentDidMount() {
       let levelOnePrompts = getLevelOneLessonData();
       let newPrompt = getRandomPrompt( levelOnePrompts );
@@ -63,16 +54,6 @@ class LevelOnePrompt extends Component {
         $icnHearts: this.createHeartIcons(levelOnePrompts.length)
       })
   }
-
-  createHeartIcons( numberOfTotalPrompts ) {
-    let $icnHearts = [];
-    for ( let i = 0; i < numberOfTotalPrompts; i++ ) {
-      let $icnHeart = <i className="fa fa-heart fa-lg is-white" key={ i }></i>;
-      $icnHearts.push( $icnHeart );
-    }
-    return $icnHearts
-  }
-
   createWordButtons( newPrompt, pastOrPresent ) {
     let that = this;
     let $btnWords = [];
@@ -183,13 +164,6 @@ class LevelOnePrompt extends Component {
       numberOfCorrectAnswers: 0,
       $btnWords: this.createWordButtons( newPrompt, pastOrPresent )
     })
-  }
-
-  resetHearts() {
-    let $icnHearts = document.querySelectorAll('.fa.fa-heart');
-    for ( let i = 0; i < $icnHearts.length; i++ ) {
-      $icnHearts[i].className = "fa fa-heart fa-lg is-white"
-    }
   }
 
   toggleHelp() {

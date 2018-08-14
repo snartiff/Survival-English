@@ -1,5 +1,24 @@
+import React, { Component } from 'react';
 import _ from 'lodash';
 import { getLevelOneLessonData, getLevelTwoLessonData } from './Data.js'
+
+export function animateHeartIcons( numberOfCorrectAnswers ) {
+  let $greyHeartIcons = document.querySelectorAll(".fa-heart");
+  if ( numberOfCorrectAnswers < this.state.numberOfTotalPrompts ) {
+    for ( let i = 0; i <= numberOfCorrectAnswers; i++ ) {
+      $greyHeartIcons[i].className = "fa fa-heart fa-lg is-red ";
+    }
+  }
+}
+
+export function createHeartIcons( numberOfTotalPrompts ) {
+  let $icnHearts = [];
+  for ( let i = 0; i < numberOfTotalPrompts; i++ ) {
+    let $icnHeart = <i className="fa fa-heart fa-lg is-white" key={ i }></i>;
+    $icnHearts.push( $icnHeart );
+  }
+  return $icnHearts
+}
 
 export function getNewPrompt( unusedPrompts, currentPrompt ) {
   if ( !_.isUndefined( currentPrompt ) && !_.isNil( currentPrompt ) ) {
@@ -48,4 +67,11 @@ export function isPresent() {
     numberOfCorrectAnswers: 0
   })
 
+}
+
+export function resetHearts() {
+  let $icnHearts = document.querySelectorAll('.fa.fa-heart');
+  for ( let i = 0; i < $icnHearts.length; i++ ) {
+    $icnHearts[i].className = "fa fa-heart fa-lg is-white"
+  }
 }
