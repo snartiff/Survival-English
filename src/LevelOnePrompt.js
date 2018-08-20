@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { getLevelOneLessonData } from './Data.js';
-import { getRandomPrompt, getNewPrompt, animateHeartIcons, createHeartIcons, resetHearts } from './CommonFunctions.js'
+import { getRandomPrompt, getNewPrompt, isPresent, animateHeartIcons, createHeartIcons, resetHearts } from './CommonFunctions.js'
 import _ from 'lodash';
 
 class LevelOnePrompt extends Component {
@@ -24,7 +24,7 @@ class LevelOnePrompt extends Component {
     this.getHelpTable = this.getHelpTable.bind(this);
     this.getNewPrompt = getNewPrompt.bind(this);
     this.isCorrectWord = this.isCorrectWord.bind(this);
-    this.isPresent = this.isPresent.bind(this);
+    this.isPresent = isPresent.bind(this);
     this.resetHearts= resetHearts.bind(this);
     this.toggleHelp = this.toggleHelp.bind(this);
   }
@@ -150,21 +150,21 @@ class LevelOnePrompt extends Component {
     }
   }
 
-  isPresent() {
-    let level = document.querySelector('.select option:checked').innerText;
-    let pastOrPresent = document.querySelector('.is-selected').innerText;
-    let prompts = getLevelOneLessonData();
-    pastOrPresent = ( pastOrPresent === "Present" ) ? false : true;
-    let newPrompt = getRandomPrompt( prompts );
-    this.resetHearts();
-    this.setState({
-      isPresent: pastOrPresent,
-      prompts: prompts,
-      prompt: newPrompt,
-      numberOfCorrectAnswers: 0,
-      $btnWords: this.createWordButtons( newPrompt, pastOrPresent )
-    })
-  }
+  // isPresent() {
+  //   let level = document.querySelector('.select option:checked').innerText;
+  //   let pastOrPresent = document.querySelector('.is-selected').innerText;
+  //   let prompts = getLevelOneLessonData();
+  //   pastOrPresent = ( pastOrPresent === "Present" ) ? false : true;
+  //   let newPrompt = getRandomPrompt( prompts );
+  //   this.resetHearts();
+  //   this.setState({
+  //     isPresent: pastOrPresent,
+  //     prompts: prompts,
+  //     prompt: newPrompt,
+  //     numberOfCorrectAnswers: 0,
+  //     $btnWords: this.createWordButtons( newPrompt, pastOrPresent )
+  //   })
+  // }
 
   toggleHelp() {
     this.setState({

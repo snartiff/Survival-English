@@ -46,6 +46,7 @@ export function isPresent() {
   let pastOrPresent = document.querySelector('.is-selected').innerText;
   let prompts = null;
   pastOrPresent = ( pastOrPresent === "Present" ) ? false : true;
+  this.resetHearts();
 
   switch( level ) {
     case "1":
@@ -59,14 +60,29 @@ export function isPresent() {
   }
 
   let newPrompt = getRandomPrompt( prompts );
-
-  this.setState({
-    isPresent: pastOrPresent,
-    prompts: prompts,
-    prompt: newPrompt,
-    numberOfCorrectAnswers: 0
-  })
-
+  switch( level ) {
+    case "1":
+    this.setState({
+      isPresent: pastOrPresent,
+      prompts: prompts,
+      prompt: newPrompt,
+      numberOfCorrectAnswers: 0,
+      $btnWords: this.createWordButtons( newPrompt, pastOrPresent )
+    })
+      break;
+    case "2":
+    this.setState({
+      isPresent: pastOrPresent,
+      prompts: prompts,
+      prompt: newPrompt,
+      numberOfCorrectAnswers: 0
+    })
+      break;
+    case "3":
+      break;
+    default:
+      break;
+  }
 }
 
 export function resetHearts() {
