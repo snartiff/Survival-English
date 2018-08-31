@@ -26,8 +26,6 @@ createLevelDropdown() {
             <option>1</option>
             <option>2</option>
             <option>3</option>
-            <option>4</option>
-            <option>5</option>
           </select>
         </div>
       </div>
@@ -65,21 +63,6 @@ handleLevelChange( e ) {
           <div>
             {ddlLevel}
             <LevelThreePrompt/>
-          </div>
-        )
-        break;
-      case "4":
-        return (
-          <div>
-            {ddlLevel}
-            <LevelFourPrompt/>
-          </div>
-        )
-      case "5":
-        return (
-          <div>
-            {ddlLevel}
-            <LevelFivePrompt/>
           </div>
         )
         break;

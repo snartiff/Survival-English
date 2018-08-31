@@ -150,22 +150,6 @@ class LevelOnePrompt extends Component {
     }
   }
 
-  // isPresent() {
-  //   let level = document.querySelector('.select option:checked').innerText;
-  //   let pastOrPresent = document.querySelector('.is-selected').innerText;
-  //   let prompts = getLevelOneLessonData();
-  //   pastOrPresent = ( pastOrPresent === "Present" ) ? false : true;
-  //   let newPrompt = getRandomPrompt( prompts );
-  //   this.resetHearts();
-  //   this.setState({
-  //     isPresent: pastOrPresent,
-  //     prompts: prompts,
-  //     prompt: newPrompt,
-  //     numberOfCorrectAnswers: 0,
-  //     $btnWords: this.createWordButtons( newPrompt, pastOrPresent )
-  //   })
-  // }
-
   toggleHelp() {
     this.setState({
       isHidden: !this.state.isHidden
@@ -208,7 +192,6 @@ class LevelOnePrompt extends Component {
         </div>
       )
     }
-
   }
 }
 

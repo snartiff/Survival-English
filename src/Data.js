@@ -12,29 +12,6 @@ import WomanTalking from './images/WomanTalking.png';
 import ManSleeping from './images/ManSleeping.jpg';
 import BrokenComputer from './images/BrokenComputer.png';
 
-export function getLevelTwoLessonData() {
-  let p1 = {};
-  let p2 = {};
-  let p3 = {};
-  let levelTwoPrompts = [];
-
-  p1.image = WomanWriting;
-  p1.sentence = "Elizabeth __ at her desk writing.";
-  p1.presentTenseAnswer = "is";
-  p1.pastTenseAnswer = "was";
-  p2.image = LateMan;
-  p2.sentence = "Gary __ late to the meeting.";
-  p2.presentTenseAnswer= "is";
-  p2.pastTenseAnswer = "Gary was late to the meeting.";
-  p3.image = ManDrinkingCoffee;
-  p3.sentence = "Jeremy __ drinking a cup of coffee.";
-  p3.presentTenseAnswer = "is";
-  p3.pastTenseAnswer = "was";
-  levelTwoPrompts.push( p1, p2, p3 );
-
-  return levelTwoPrompts
-}
-
 export function getLevelOneLessonData() {
   let p1 = {};
   let p2 = {};
@@ -113,4 +90,47 @@ export function getLevelOneLessonData() {
   }
 
   return levelOnePrompts
+}
+
+export function getLevelTwoLessonData() {
+  let p1 = {};
+  let p2 = {};
+  let p3 = {};
+  let levelTwoPrompts = [];
+
+  p1.image = WomanWriting;
+  p1.sentence = "Elizabeth __ at her desk writing.";
+  p1.presentTenseAnswer = "is";
+  p1.pastTenseAnswer = "was";
+  p2.image = LateMan;
+  p2.sentence = "Gary __ late to the meeting.";
+  p2.presentTenseAnswer= "is";
+  p2.pastTenseAnswer = "was";
+  p3.image = ManDrinkingCoffee;
+  p3.sentence = "Jeremy __ drinking a cup of coffee.";
+  p3.presentTenseAnswer = "is";
+  p3.pastTenseAnswer = "was";
+  levelTwoPrompts.push( p1, p2, p3 );
+
+  return levelTwoPrompts
+}
+
+export function getLevelThreeLessonData() {
+  let p1 = {};
+  let p2 = {};
+  let p3 = {};
+  let levelTwoPrompts = [];
+
+  p1.image = WomanWriting;
+  p1.presentTenseSentence = "Elizabeth is at her desk writing.";
+  p1.pastTenseSentence = "Elizabeth was at her desk writing.";
+  p2.image = LateMan;
+  p2.presentTenseSentence = "Gary is late to the meeting.";
+  p2.pastTenseSentence = "Gary was late to the meeting.";
+  p3.image = ManDrinkingCoffee;
+  p3.presentTenseSentence= "Jeremy is drinking a cup of coffee.";
+  p3.pastTenseSentence= "Jeremy was drinking a cup of coffee.";
+  levelTwoPrompts.push( p1, p2, p3 );
+
+  return levelTwoPrompts
 }

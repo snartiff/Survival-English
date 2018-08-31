@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import _ from 'lodash';
-import { getLevelOneLessonData, getLevelTwoLessonData } from './Data.js'
+import { getLevelOneLessonData, getLevelTwoLessonData, getLevelThreeLessonData } from './Data.js'
 
 export function animateHeartIcons( numberOfCorrectAnswers ) {
   let $greyHeartIcons = document.querySelectorAll(".fa-heart");
@@ -55,6 +55,9 @@ export function isPresent() {
     case "2":
       prompts = getLevelTwoLessonData();
       break;
+    case "3":
+      prompts = getLevelThreeLessonData();
+      break;
     default:
       break;
   }
@@ -79,6 +82,13 @@ export function isPresent() {
     })
       break;
     case "3":
+    this.setState({
+      isPresent: pastOrPresent,
+      prompts: prompts,
+      prompt: newPrompt,
+      numberOfCorrectAnswers: 0,
+      $btnWords: this.createWordButtons( newPrompt, pastOrPresent )
+    })    
       break;
     default:
       break;

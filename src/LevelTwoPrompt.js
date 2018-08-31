@@ -103,12 +103,14 @@ class LevelTwoPrompt extends Component {
         <div className="title is-4">
           <h4 className="directions"><span className="bold">Directions: </span>{ this.state.isPresent ? "Write the present tense word." : "Write the past tense word."  }</h4>
         </div>
-          <div className="align-center"><img className="PromptImage" src={ this.state.prompt.image }></img></div>
-          <div className="WritingPrompt title is-2 align-center">{ this.state.prompt.sentence }</div>
+        <div className="align-center"><img className="PromptImage" src={ this.state.prompt.image }></img></div>
+        <div className="WritingPrompt title is-2 align-center">
+          <h1>{ this.state.prompt.sentence }</h1>
+        </div>
         <div className="field">
           <div className="control" >
             <input className="userInput input is-medium is-info"></input>
-            <button className="button is-medium is-warning" onClick={ this.handleSubmit }>Submit</button>
+            <button className="button is-medium is-black" onClick={ this.handleSubmit }>Submit</button>
             <div className="title is-1 is-green align-center">{ this.state.prompt.feedback }</div>
           </div>
         </div>
