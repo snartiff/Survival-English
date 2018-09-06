@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import _ from 'lodash';
 import { getLevelOneLessonData, getLevelTwoLessonData, getLevelThreeLessonData } from './Data.js'
+import { handleSubmit } from './LevelThreePrompt.js'
 
 export function animateHeartIcons( numberOfCorrectAnswers ) {
   let $greyHeartIcons = document.querySelectorAll(".fa-heart");
@@ -41,10 +42,11 @@ export function getRandomPrompt( prompts ) {
   return randomPrompt
 }
 
-export function isPresent() {
+export function isPresent(e) {
   let level = document.querySelector('.select option:checked').innerText;
   let pastOrPresent = document.querySelector('.is-selected').innerText;
   let prompts = null;
+
   pastOrPresent = ( pastOrPresent === "Present" ) ? false : true;
   this.resetHearts();
 
@@ -56,6 +58,10 @@ export function isPresent() {
       prompts = getLevelTwoLessonData();
       break;
     case "3":
+      this.setState({
+        usersSentence: "",
+      })
+      this.handleSubmit();
       prompts = getLevelThreeLessonData();
       break;
     default:
@@ -88,7 +94,7 @@ export function isPresent() {
       prompt: newPrompt,
       numberOfCorrectAnswers: 0,
       $btnWords: this.createWordButtons( newPrompt, pastOrPresent )
-    })    
+    })
       break;
     default:
       break;

@@ -128,7 +128,7 @@ isCorrectWord( e ) {
     usersSentence: usersSentence.join(" ")
   })
 }
-
+//make isPresent into an object with a isPresent.value and isPresent.cssClass
     render() {
       if ( !_.isUndefined( this.state.prompt ) && !_.isNil( this.state.prompt ) ) {
       return (
