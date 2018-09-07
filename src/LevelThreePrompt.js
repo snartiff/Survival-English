@@ -108,6 +108,7 @@ handleSubmit() {
       })
       this.animateHeartIcons( this.state.numberOfCorrectAnswers );
     } else {
+      //put function here to show users positive feedback. Highlight words that are in the correct position in green
       this.setState({
         usersSentence: ""
       })
@@ -135,7 +136,7 @@ isCorrectWord( e ) {
         <div>
           <div className="inner-tabs align-center">
               <a onClick={ this.isPresent } className={ this.state.isPresent ? "is-selected" : "" }>Present</a>
-              <a onClick={ this.isPresent } className={ this.state.isPresent ? "" : "is-selected" }>Past</a>
+              <a onClick={ this.isPresent } className={ !this.state.isPresent ? "is-selected" : "" }>Past</a>
           </div>
           <div className="title is-4">
             <h4 className="directions"><span className="bold">Directions: </span>Click on the buttons to make a complete sentence.</h4>

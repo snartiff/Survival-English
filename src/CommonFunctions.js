@@ -43,13 +43,14 @@ export function getRandomPrompt( prompts ) {
 }
 
 export function isPresent(e) {
+  let clickedLinkText = e.target.innerText;
   let level = document.querySelector('.select option:checked').innerText;
-  let pastOrPresent = document.querySelector('.is-selected').innerText;
+  let currentlyHighlightedText = document.querySelector('.is-selected').innerText;
   let prompts = null;
 
-  pastOrPresent = ( pastOrPresent === "Present" ) ? false : true;
+  let pastOrPresent = ( currentlyHighlightedText === "Present" ) ? false : true;
   this.resetHearts();
-
+//put if statement here for pastOrPresent
   switch( level ) {
     case "1":
       prompts = getLevelOneLessonData();
@@ -68,6 +69,7 @@ export function isPresent(e) {
       break;
   }
 
+if ( clickedLinkText != currentlyHighlightedText ) {
   let newPrompt = getRandomPrompt( prompts );
   switch( level ) {
     case "1":
@@ -99,6 +101,7 @@ export function isPresent(e) {
     default:
       break;
   }
+}
 }
 
 export function resetHearts() {
